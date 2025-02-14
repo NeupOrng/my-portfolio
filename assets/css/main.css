@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    transition: 500ms ease-in-out;
+}
+/* ========== common ============ */
+button {
+    @apply px-4 py-1 rounded-xl text-base font-semibold;
+    transition: 500ms ease-in-out;
+}
+
+/* ========== light mode ============ */
+.light-mode {
+  background-color: #F9F7F9;
+  color: #040829;
+}
+
+.light-mode button {
+    background-color: #040829;
+    color: #F9F7F9;
+}
+
+/* ========== dark mode ============ */
+.dark-mode {
+  background-color: #040829;
+  color: #F9F7F9;
+}
+.dark-mode button {
+    background-color: #F9F7F9;
+    color: #303136;
+}
