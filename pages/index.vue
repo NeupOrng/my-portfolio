@@ -1,5 +1,5 @@
 <template>
-  <div id="landing" class="min-h-screen background-primary">
+  <div id="landing" class="min-h-screen">
     <!-- Top Section: Welcome and Photo -->
     <section
       class="container mx-auto px-6 py-16 flex flex-col justify-center md:justify-between md:flex-row items-center h-screen"

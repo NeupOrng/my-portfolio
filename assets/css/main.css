@@ -3,34 +3,46 @@
 @tailwind utilities;
 
 :root {
+  margin: 0px;
+  padding: 0px;
+
   --primary-light-bg-color: #f9f7f9;
   --primary-dark-bg-color: #121212;
+
+  --primary-light-text-color: #121212;
+  --primary-dark-text-color: #f9f7f9;
+
+  --ui-background-color: var(--primary-light-bg-color);
+  --ui-text-color: var(--primary-light-text-color);
+  --ui-button-background-color: var(--primary-dark-bg-color);
+  --ui-button-text-color: var(--primary-dark-text-color);
 }
 
 /* ========== common ============ */
 button {
   @apply px-4 py-1 rounded-xl text-base font-semibold;
+  background-color: var(--ui-button-background-color);
+  color: var(--ui-button-text-color);
   transition: 500ms ease-in-out;
 }
-
+button:hover {
+  opacity: 0.8;
+  transition: 300ms ease-in-out;
+}
+section {
+  @apply max-w-[1440px];
+}
 /* ========== light mode ============ */
 .background-primary {
-  background-color: var(--primary-light-bg-color);
-  color: #040829;
+  background-color: var(--ui-background-color);
+  color: var(--ui-text-color);
   transition: 500ms ease-in-out;
-}
-
-button {
-  background-color: var(--primary-dark-bg-color);
-  color: #f9f7f9;
 }
 
 /* ========== dark mode ============ */
-.dark .background-primary {
-  background-color: var(--primary-dark-bg-color);
-  color: #f9f7f9;
-}
-.dark button {
-  background-color: var(--primary-light-bg-color);
-  color: #303136;
+.dark{
+  --ui-background-color: var(--primary-dark-bg-color);
+  --ui-text-color: var(--primary-dark-text-color);
+  --ui-button-background-color: var(--primary-light-bg-color);
+  --ui-button-text-color: var(--primary-light-text-color);
 }

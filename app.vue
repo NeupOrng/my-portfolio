@@ -1,17 +1,13 @@
 <template>
-  <div :class="theme.theme" class="w-full min-h-screen">
-    <div class="absolute top-0 right-0 flex justify-end items-center p-3">
-      <button class="primary-button" @click="theme.changeMode">
-        <span v-if="theme.isDarkMode">🌞</span>
-        <span v-else>🌙</span>
-      </button>
-    </div>
-    <NuxtPage />
+  <div class="w-full min-h-screen">
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
   </div>
 </template>
 
 <script setup lang="ts">
-  const theme = useThemeStore();
+
 </script>
 
 <style>
