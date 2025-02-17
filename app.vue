@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full min-h-screen">
+  <div class="w-full min-h-screen background-primary" disable-selection :class="theme.theme">
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-
+const theme = useThemeStore();
 </script>
 
 <style>
