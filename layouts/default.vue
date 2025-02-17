@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="fixed top-0 left-0 w-full background-primary py-3">
+    <div class="fixed top-0 left-0 w-full background-primary py-3 z-10">
       <section class="relative flex justify-end items-center mx-auto max-w-[1440px] px-2 z-10">
         <button class="secondary-button" @click="theme.changeMode">
           <div class="relative size-[18px] overflow-hidden">
@@ -17,7 +17,7 @@
         </button>
       </section>
     </div>
-    <div class="w-full min-h-screen relative z-1">
+    <div class="w-full min-h-screen relative z-0">
       <slot />
     </div>
   </div>
