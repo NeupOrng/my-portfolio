@@ -3,31 +3,34 @@
 @tailwind utilities;
 
 :root {
-    transition: 500ms ease-in-out;
+  --primary-light-bg-color: #f9f7f9;
+  --primary-dark-bg-color: #121212;
 }
+
 /* ========== common ============ */
 button {
-    @apply px-4 py-1 rounded-xl text-base font-semibold;
-    transition: 500ms ease-in-out;
+  @apply px-4 py-1 rounded-xl text-base font-semibold;
+  transition: 500ms ease-in-out;
 }
 
 /* ========== light mode ============ */
-.light-mode {
-  background-color: #F9F7F9;
+.background-primary {
+  background-color: var(--primary-light-bg-color);
   color: #040829;
+  transition: 500ms ease-in-out;
 }
 
-.light-mode button {
-    background-color: #040829;
-    color: #F9F7F9;
+button {
+  background-color: var(--primary-dark-bg-color);
+  color: #f9f7f9;
 }
 
 /* ========== dark mode ============ */
-.dark-mode {
-  background-color: #040829;
-  color: #F9F7F9;
+.dark .background-primary {
+  background-color: var(--primary-dark-bg-color);
+  color: #f9f7f9;
 }
-.dark-mode button {
-    background-color: #F9F7F9;
-    color: #303136;
+.dark button {
+  background-color: var(--primary-light-bg-color);
+  color: #303136;
 }
