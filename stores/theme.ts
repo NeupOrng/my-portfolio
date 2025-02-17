@@ -13,10 +13,24 @@ export const useThemeStore = defineStore('theme',  {
                 const isDarkModeFromBrowser = window.matchMedia("(prefers-color-scheme: dark)").matches;
                 this.colorMode = isDarkModeFromBrowser ? 'dark' : 'light';
             }
+            useHead({
+                bodyAttrs: {
+                    class: [
+                        'background-primary',
+                        this.theme,
+                    ]
+                }
+            })
         },
         changeMode() {
             this.colorMode = this.isDarkMode ? 'light' : 'dark';
             useCookie(COLOR_MODE).value = this.colorMode;
+            const body = document.querySelector('body');
+            if(this.theme) {
+                body?.classList.add('dark')
+            } else {
+                body?.classList.remove('dark')
+            }
         },
     }, 
     getters: {

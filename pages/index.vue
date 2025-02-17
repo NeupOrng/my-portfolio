@@ -15,7 +15,7 @@
           </div>
         </div>
         <!-- Photo -->
-        <div class="md:w-1/2 mt-8 md:mt-0 flex justify-center disable-selection">
+        <div class="md:w-1/2 mt-8 md:mt-0 flex justify-center">
           <div 
             class="w-[200px] h-[200px] before:h-[200px] before:w-[200px]
             md:w-[300px] md:h-[300px] md:before:h-[300px] md:before:w-[300px] 

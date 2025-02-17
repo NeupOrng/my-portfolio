@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="fixed top-0 left-0 w-screen background-primary py-3">
-      <section class="relative flex justify-end items-center mx-auto w-[95%]">
+    <div class="fixed top-0 left-0 w-full background-primary py-3">
+      <section class="relative flex justify-end items-center mx-auto max-w-[1440px] px-2 z-10">
         <button class="secondary-button" @click="theme.changeMode">
           <div class="relative size-[18px] overflow-hidden">
             <span :class="theme.theme === 'dark' ? 'animate-rise' : 'animate-shine'" :hidden="theme.theme === 'dark'"
@@ -17,7 +17,7 @@
         </button>
       </section>
     </div>
-    <div class="w-full min-h-screen">
+    <div class="w-full min-h-screen relative z-1">
       <slot />
     </div>
   </div>

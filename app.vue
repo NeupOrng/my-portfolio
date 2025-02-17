@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full min-h-screen background-primary" disable-selection :class="theme.theme">
+  <div class="w-full min-h-screen" disable-selection>
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
