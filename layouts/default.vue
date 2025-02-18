@@ -4,7 +4,7 @@
       <section class="w-full px-2 font-mono">
         <h1 class="font-bold text-2xl"><span class="text-[#C8F31D]">O</span>RNG</h1>
       </section>
-      <section class="relative gap-2 w-full flex justify-end items-center mx-auto max-w-[1440px] px-2 z-10">
+      <section class="relative gap-4 w-full flex justify-end items-center mx-auto max-w-[1440px] px-2 z-10">
         <NuxtLink to="/">Home</NuxtLink>
         <NuxtLink to="/blog">Blog</NuxtLink>
         <button class="secondary-button" @click="theme.changeMode">

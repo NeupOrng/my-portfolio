@@ -3,6 +3,7 @@ import { defineStore } from "pinia";
 export const useThemeStore = defineStore('theme',  {
     state: () => ({
         colorMode: 'dark',
+        isLoading: false
     }),
     actions: {
         init() {
@@ -32,6 +33,17 @@ export const useThemeStore = defineStore('theme',  {
                 body?.classList.remove('dark')
             }
         },
+        async onLoading(promiseFunc: () => Promise<T>): Promise<T> {
+            try {
+                this.isLoading = true;
+                return await promiseFunc();
+            } catch (error) {
+                console.error('Error executing function:', error);
+                throw error;
+            } finally {
+                this.isLoading = false;
+            }
+        },
     }, 
     getters: {
         isDarkMode: (state): boolean => {
@@ -39,6 +51,9 @@ export const useThemeStore = defineStore('theme',  {
         },
         theme: (state): string => {
             return state.colorMode === 'dark' ? 'dark' : ''; 
+        },
+        isLoadingScreenOn: (state): boolean => {
+            return state.isLoading;
         }
     }
 }); 
