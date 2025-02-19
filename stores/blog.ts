@@ -1,3 +1,4 @@
+import { Blog, type IBlog } from "~/models";
 
 export const useBlogStore = defineStore('blog', {
     state: () => ({
@@ -11,7 +12,10 @@ export const useBlogStore = defineStore('blog', {
         async promiseFetchBlog() {
             this.blogs = [];
             const response = await $fetch('/api/blog');
-            this.blogs = response.data;
+            response.data.forEach((blog) => {
+                const blogObject = new Blog(blog as unknown as IBlog);
+                this.blogs.push(blog)
+            })
         }
     },
     getters: {

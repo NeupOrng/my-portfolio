@@ -1,7 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   srcDir: "./",
-
+  imports: {
+    dirs: ['~/models']
+  },
   app: {
     pageTransition: {
       name: 'page',

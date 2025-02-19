@@ -11,8 +11,10 @@ export const useThemeStore = defineStore('theme',  {
             if(storeMode.value) {
                 this.colorMode = storeMode.value;
             } else {
-                const isDarkModeFromBrowser = window.matchMedia("(prefers-color-scheme: dark)").matches;
-                this.colorMode = isDarkModeFromBrowser ? 'dark' : 'light';
+                if(window) {
+                    const isDarkModeFromBrowser = window.matchMedia("(prefers-color-scheme: dark)").matches;
+                    this.colorMode = isDarkModeFromBrowser ? 'dark' : 'light';
+                }
             }
             useHead({
                 bodyAttrs: {

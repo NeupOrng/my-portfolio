@@ -1,13 +1,12 @@
 <template>
     <div class="w-full pt-20">
-        <section class="w-full max-w-[1440px] mx-auto flex flex-col">
-            <div class="font-bold text-2xl w-full">
-                <h1 class="mx-auto w-fit px-4">My Blogs</h1>
-            </div>
-            <div class="w-full grid grid-cols-4 px-5">
-                <div class="background-secondary p-4 rounded-xl" v-for="(blog, index) in blogs" :key="index">
-                    {{ blog.title }}
-                </div>
+        <section class="w-full max-w-[1440px] mx-auto flex flex-col items-center">
+            <div class="w-fit gap-5 grid grid-cols-1 md:grid-cols-4 px-5 pt-5">
+                <BlogCard
+                    v-for="(blog, index) in blogs" 
+                    :key="index"
+                    :blog="blog"
+                />
             </div>
         </section>
     </div>
