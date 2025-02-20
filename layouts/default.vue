@@ -1,5 +1,11 @@
 <template>
   <div class="w-full">
+    <div class="w-screen absolute h-screen block z-30 " :class="theme.loadingClass">
+      <div class="w-full h-full block background-primary opacity-80"></div>
+      <div>
+        <loading />
+      </div>
+    </div>
     <div class="fixed top-0 left-0 w-full background-primary py-3 z-10">
       <div class="w-full max-w-[1440px] mx-auto flex justify-between">
         <section class="w-full px-2 font-mono">
@@ -31,6 +37,19 @@
 </template>
 <script setup lang="ts">
 const theme = useThemeStore();
+const isLoading = ref(false);
+const router = useRouter();
+
+router.beforeEach(() => {
+  theme.setIsRouteChanging(true)
+});
+router.afterEach(() => {
+  setTimeout(() => (theme.setIsRouteChanging(false)), 500);
+});
+
+const loadingClass = computed(() => {
+  return isLoading.value ? '' : 'hidden';
+})
 </script>
 <style scoped>
 @keyframes rise {
