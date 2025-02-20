@@ -2,7 +2,8 @@ import { Blog, type IBlog } from "~/models";
 
 export const useBlogStore = defineStore('blog', {
     state: () => ({
-        blogs: []
+        blogs: [] as IBlog[],
+        currentBlog: {},
     }),
     actions: {
         async fetchBlog() {
@@ -14,7 +15,14 @@ export const useBlogStore = defineStore('blog', {
             const response = await $fetch('/api/blog');
             response.data.forEach((blog) => {
                 const blogObject = new Blog(blog as unknown as IBlog);
-                this.blogs.push(blog)
+                this.blogs.push(blogObject)
+            })
+        },
+        async fetchBlogById(id: string) {
+            const themeStore = useThemeStore();
+            await themeStore.onLoading(async () => {
+                const response = await $fetch(`/api/blog/${id}`)
+                this.currentBlog = response.data;
             })
         }
     },

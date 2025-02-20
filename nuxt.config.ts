@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   srcDir: "./",
   imports: {
-    dirs: ['~/models']
+    dirs: ['~/models', '~/mock']
   },
   app: {
     pageTransition: {
