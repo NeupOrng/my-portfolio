@@ -37,6 +37,20 @@
   --ui-text-color: var(--primary-light-text-color);
 }
 
+::-webkit-scrollbar {
+  background-color: var(--ui-secondary-background-color);
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--ui-secondary-button-background-color);
+  border-radius: 5px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 /* ========== common ============ */
 .disable-selection {
   user-select: none;

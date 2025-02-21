@@ -13,16 +13,15 @@ export const useBlogStore = defineStore('blog', {
         async promiseFetchBlog() {
             this.blogs = [];
             const response = await $fetch('/api/blog');
-            response.data.forEach((blog) => {
-                const blogObject = new Blog(blog as unknown as IBlog);
-                this.blogs.push(blogObject)
-            })
+            this.blogs = response.data;
         },
         async fetchBlogById(id: string) {
             const themeStore = useThemeStore();
             await themeStore.onLoading(async () => {
                 const response = await $fetch(`/api/blog/${id}`)
-                this.currentBlog = response.data;
+                this.currentBlog =  new Blog(response.data as IBlog);
+                await this.currentBlog.generateHtmlContent();
+                console.log(this.currentBlog);
             })
         }
     },
