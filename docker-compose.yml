@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  nuxt-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nuxt-app
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app # Mount the current directory to /app in the container
+      - /app/node_modules # Ensure node_modules is not overwritten
+    environment:
+      - NODE_ENV=development
+    command: pnpm run dev
+    restart: unless-stopped
