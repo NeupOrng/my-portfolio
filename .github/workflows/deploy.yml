@@ -9,6 +9,9 @@ jobs:
   deploy:
     runs-on: self-hosted  # Use the self-hosted runner
     steps:
+      - name: Check current user
+        run: whoami
+
       - name: Checkout code
         uses: actions/checkout@v3
 
