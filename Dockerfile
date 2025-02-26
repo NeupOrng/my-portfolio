@@ -38,7 +38,7 @@ COPY --from=builder /app/.output ./.output
 COPY --from=builder /app/package.json ./
 
 # Install only production dependencies
-RUN pnpm install --prod --ignore-scripts
+RUN pnpm install
 
 # Expose port
 EXPOSE 3000
