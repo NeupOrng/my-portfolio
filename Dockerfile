@@ -24,6 +24,9 @@ RUN pnpm run build
 # --- Production Stage ---
 FROM node:lts-alpine3.19 AS runner
 
+# Install pnpm globally
+RUN npm install -g pnpm
+
 # Set environment variables
 ENV NODE_ENV=production
 
