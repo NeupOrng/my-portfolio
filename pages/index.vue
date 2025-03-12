@@ -1,5 +1,5 @@
 <template>
-  <div id="landing-page" class="flex flex-col w-full min-h-screen  disable-selection">
+  <div id="landing-page" class="flex flex-col w-full min-h-screen">
     <!-- Top Section: Welcome and Photo -->
     <section class="w-full">
       <!-- Welcome Text -->
@@ -39,34 +39,19 @@
         <h2 class="text-3xl font-bold text-center mb-8">
           My Skills
         </h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <!-- Skill 1 -->
-          <div class="bg-gray-100 p-6 rounded-lg shadow-md text-center">
-            <h3 class="text-xl font-semibold mb-4">Vue.js</h3>
-            <p>
-              Proficient in building dynamic and responsive web applications
-              using Vue.js.
-            </p>
-          </div>
-          <!-- Skill 2 -->
-          <div class="bg-gray-100 p-6 rounded-lg shadow-md text-center">
-            <h3 class="text-xl font-semibold text-gray-800 mb-4">
-              Tailwind CSS
-            </h3>
-            <p class="text-gray-600">
-              Experienced in creating modern and responsive designs with
-              Tailwind CSS.
-            </p>
-          </div>
-          <!-- Skill 3 -->
-          <div class="bg-gray-100 p-6 rounded-lg shadow-md text-center">
-            <h3 class="text-xl font-semibold text-gray-800 mb-4">JavaScript</h3>
-            <p class="text-gray-600">
-              Strong foundation in JavaScript for building interactive web
-              experiences.
-            </p>
-          </div>
-        </div>
+        <Tab :tabs="tabs">
+          <template v-for="tab in tabs" :key="tab.label" :name="tab.slotName">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div v-for="skill in tab.content.split(', ')" :key="skill" class="bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">{{ skill }}</h3>
+                <p class="text-gray-600">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                  Phasellus nec iaculis mauris.
+                </p>
+              </div>
+            </div>
+          </template>
+        </Tab>
       </div>
     </section>
 
@@ -103,11 +88,18 @@
   </div>
 </template>
 <script lang="ts" setup>
+import Tab from '~/components/tab.vue';
+
 const displayText = "Hi, I'm Orng, a passionate developer specializing in Vue.js and modern web technologies.";
 const currentText = ref("");
 const totalLength = displayText.length;
 const hideCursor = ref(false);
 let index = 0;
+const tabs = reactive([
+  { label: "Frontend", content: "Vue.js, React.js, Tailwind CSS", slotName: "frontend" },
+  { label: "Backend", content: "Node.js, Express.js, MongoDB", slotName: "backend" },
+  { label: "Others", content: "Firebase, Git, Docker", slotName: "others" },
+]);
 onBeforeMount(() => {
   const interval = setInterval(() => {
     currentText.value += displayText[index];

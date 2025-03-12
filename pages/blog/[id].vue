@@ -1,11 +1,11 @@
 <template>
-    <div class="w-full pt-20 ">
+    <div class="w-full pt-20">
         <section class="w-full max-w-[1440px]  mx-auto flex flex-col items-center mb-12">
             <div>
                 <img :src="currentBlog.cover" alt="blog-cover" class="max-w-full h-[600px] object-cover" />
             </div>
         </section>
-        <section class="w-full max-w-[1440px] mx-auto flex flex-col items-center">
+        <section class="w-full max-w-[1440px] mx-auto flex flex-col items-center px-2">
             <Markdown>
                 <div v-html="content"></div>
             </Markdown>
