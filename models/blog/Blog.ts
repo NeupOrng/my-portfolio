@@ -10,8 +10,19 @@ export default class Blog implements IBlog {
     content?: string;
     htmlContent?: string;
     
-    constructor(object: IBlog) {
+    constructor(){
+        this.id = '';
+        this.title = '';
+        this.cover = '';
+        this.createdAt = new Date();
+        this.tags = [];
+        this.content = '';
+        this.htmlContent = '';
+    }
+
+    fromJson(object: any): Blog {
         Object.assign(this, object);
+        return this;
     }
 
     async generateHtmlContent() {

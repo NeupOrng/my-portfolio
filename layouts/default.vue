@@ -1,6 +1,6 @@
 <template>
   <div class="w-full">
-    <div class="w-screen absolute h-screen block z-30 " :class="theme.loadingClass">
+    <div class="w-screen fixed h-screen block z-30 ease-in-out duration-300" :class="theme.loadingClass">
       <div class="w-full h-full block background-primary opacity-80"></div>
       <div>
         <loading />
@@ -14,7 +14,7 @@
         <section class="relative gap-4 w-full flex justify-end items-center mx-auto max-w-[1440px] px-2 z-10">
           <NuxtLink to="/">Home</NuxtLink>
           <NuxtLink to="/blog">Blog</NuxtLink>
-          <button class="secondary-button" @click="theme.changeMode">
+          <!-- <button class="secondary-button" @click="theme.changeMode">
             <div class="relative size-[18px] overflow-hidden">
               <span :class="theme.theme === 'dark' ? 'animate-rise' : 'animate-shine'" :hidden="theme.theme === 'dark'"
                 class="absolute block size-[18px] flex items-center justify-center opacity-0">
@@ -26,18 +26,42 @@
                 <Icon name="material-symbols:light-mode-rounded" size="16" />
               </span>
             </div>
-          </button>
+          </button> -->
         </section>
       </div>
     </div>
     <div class="w-full min-h-screen relative z-0">
       <slot />
     </div>
+    <footer class="background-secondary py-6 mt-6">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <p class="text-sm">&copy; 2024 Orng NEUP. All rights reserved.</p>
+          
+          <div class="flex space-x-4 mt-4 md:mt-0">
+            <a href="https://github.com/NeupOrng" 
+              target="_blank"
+              class="text-gray-400 hover:text-white transition">
+              <Icon name="uil:github" size="24" />
+            </a>
+            <a href="https://www.linkedin.com/in/orng-neup-91ab14230/" 
+              target="_blank"
+              class="text-gray-400 hover:text-white transition">
+              <Icon name="uil:linkedin" size="24" />
+            </a>
+            <a href="https://web.facebook.com/neup.orng" 
+              target="_blank"
+              class="text-gray-400 hover:text-white transition">
+              <Icon name="uil:facebook" size="24" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
   </div>
 </template>
 <script setup lang="ts">
 const theme = useThemeStore();
-const isLoading = ref(false);
 const router = useRouter();
 
 router.beforeEach(() => {
@@ -46,10 +70,6 @@ router.beforeEach(() => {
 router.afterEach(() => {
   setTimeout(() => (theme.setIsRouteChanging(false)), 500);
 });
-
-const loadingClass = computed(() => {
-  return isLoading.value ? '' : 'hidden';
-})
 </script>
 <style scoped>
 @keyframes rise {

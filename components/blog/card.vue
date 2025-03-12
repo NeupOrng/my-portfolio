@@ -2,13 +2,13 @@
   <div
     class="blog-card background-secondary overflow-hidden rounded-xl h-[15rem] w-[15rem] md:h-[20rem] md:w-[20rem] flex flex-col cursor-pointer"
   >
-    <NuxtLink :to="`/blog/${computedBlog.id}`">
+    <NuxtLink :to="`/blog/${props.blog.id}`">
       <div class="block w-full overflow-hidden h-[10rem] md:h-[12rem]">
-        <img class="object-fit card-cover" :src="computedBlog.cover" />
+        <img class="object-fit card-cover" :src="props.blog.cover" />
       </div>
       <div class="py-2 px-4">
         <h1 class="font-bold text-lg">
-          {{ computedBlog.title }}
+          {{ props.blog.title }}
         </h1>
       </div>
     </NuxtLink>
@@ -19,10 +19,6 @@ import { Blog } from "~/models";
 const props = defineProps<{
   blog: Blog;
 }>();
-
-const computedBlog = computed(() => {
-  return new Blog(props.blog);
-});
 </script>
 <style scoped>
 .blog-card:hover {

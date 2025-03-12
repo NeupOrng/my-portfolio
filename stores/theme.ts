@@ -40,12 +40,18 @@ export const useThemeStore = defineStore('theme',  {
         async onLoading<T>(promiseFunc: () => Promise<T>): Promise<T> {
             try {
                 this.isLoading = true;
+                if(document) {
+                    document.body.style.overflow = 'hidden';
+                }
                 return await promiseFunc();
             } catch (error) {
                 console.error('Error executing function:', error);
                 throw error;
             } finally {
-                setTimeout(() => (this.isLoading = false), 500);
+                this.isLoading = false;
+                if(document) {
+                    document.body.style.overflow = '';
+                }
             }
         },
         setIsRouteChanging(status: boolean) {

@@ -5,6 +5,7 @@
 </template>
 <style>
 .custom-markdown {
+    
     h1 {
         @apply text-4xl font-bold my-2;
     }
@@ -13,9 +14,16 @@
     }
     ul {
         list-style-type: circle;
-        
+        list-style-position: inside;
         li ul {
             list-style-type: square;
+        }
+    }
+    ol {
+        list-style-type: decimal;
+        list-style-position: inside;
+        li ol {
+            list-style-type: lower-alpha;
         }
     }
     pre {
