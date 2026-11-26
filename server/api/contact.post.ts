@@ -55,7 +55,7 @@ export default defineEventHandler(async (event) => {
 
   // Plain text (no parse_mode) so nothing in the message can inject formatting.
   const text = [
-    'New request from orng.neup portfolio',
+    'New request from orngneup.dev',
     '',
     `From: ${email}`,
     `Topic: ${topic}`,

@@ -214,7 +214,7 @@ Inside a HUD frame: a mono header row (method and route, "trace"), then ordered 
 Fixed 32px ink bar at the viewport foot, mono 0.75rem, hairline top border: a 6px square dot (lime when settled, Ash while navigating), `GET`, the live path, and `200 OK` in lime (an ellipsis while pending). Announced politely to assistive tech.
 
 ### Boot Loader
-First visit per session only: the wordmark, a mono line (`boot /orng.neup … ready`) and a 1px lime bar that fills over 900ms, then the overlay lifts with a clip-path wipe at about 1.05s. Skipped on reduced motion, without JavaScript, and on repeat visits.
+First visit per session only: the wordmark, a mono line (`boot /orngneup.dev … ready`) and a 1px lime bar that fills over 900ms, then the overlay lifts with a clip-path wipe at about 1.05s. Skipped on reduced motion, without JavaScript, and on repeat visits.
 
 ### Wordmark
 "ORNG" in Archivo 600 with 0.08em tracking, the "O" in lime. Appears on ink only.

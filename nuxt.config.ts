@@ -1,14 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 const bootCheck = `try{if(location.search.indexOf('noboot')>-1||sessionStorage.getItem('orng-boot')||matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('booted')}sessionStorage.setItem('orng-boot','1')}catch(e){document.documentElement.classList.add('booted')}`
 
-
-// Cloudflare builds prerender every page, so canonical URLs and share images
-// are baked in at build time and need the live origin then.
-// Without it the build still succeeds, but canonical and share tags are left out.
-if ((process.env.NITRO_PRESET || '').startsWith('cloudflare') && !process.env.NUXT_PUBLIC_SITE_URL) {
-  console.warn('[seo] NUXT_PUBLIC_SITE_URL is not set: prerendered pages will have no canonical URL or share image until it is.')
-}
-
 export default defineNuxtConfig({
   srcDir: "./",
   imports: {
@@ -72,9 +64,9 @@ export default defineNuxtConfig({
     telegramBotToken: '',
     telegramChatId: '',
     public: {
-      // Live origin for canonical URLs, share images and the sitemap, e.g.
-      // https://example.com. Set NUXT_PUBLIC_SITE_URL; falls back to the request origin.
-      siteUrl: '',
+      // Live origin for canonical URLs, share images and the sitemap.
+      // NUXT_PUBLIC_SITE_URL overrides it (e.g. for a preview domain).
+      siteUrl: 'https://orngneup.dev',
     }
   },
 

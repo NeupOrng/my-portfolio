@@ -7,7 +7,7 @@
         <span class="truncate">{{ path }}</span>
         <span :class="pending ? 'text-muted' : 'text-signal'">{{ pending ? '…' : '200 OK' }}</span>
       </p>
-      <p class="hidden text-muted sm:block">orng.neup // full-stack</p>
+      <p class="hidden text-muted sm:block">orngneup.dev // full-stack</p>
     </div>
   </div>
 </template>

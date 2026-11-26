@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-Personal portfolio of **Orng Neup**, a full-stack engineer skilled with AI. Built with Nuxt 3 and deployed to a self-hosted server.
+Personal portfolio of **Orng Neup**, a full-stack engineer skilled with AI, live at **https://orngneup.dev**. Built with Nuxt 3 and deployed to Cloudflare Workers.
 
 Read **PRODUCT.md** before changing content: it lists who the site is for, what can be claimed, and what must never be made up. Read **DESIGN.md** (once written) and `.impeccable/surfaces/pages-index-vue.md` before changing the look.
 
@@ -34,7 +34,7 @@ pnpm preview:cf     # wrangler dev on :8787 (reads .env, so the contact form rea
 pnpm deploy:cf      # build + wrangler deploy (after `npx wrangler login`)
 ```
 
-- Without `NUXT_PUBLIC_SITE_URL` the Cloudflare build warns and leaves out canonical URLs, share images and absolute structured-data URLs (never bakes in localhost). Set it to restore them.
+- The site origin defaults to `https://orngneup.dev` (`runtimeConfig.public.siteUrl`); `NUXT_PUBLIC_SITE_URL` overrides it. If it were ever empty, prerendered pages leave out canonical and share URLs rather than baking in localhost.
 - In Cloudflare, set `NUXT_PUBLIC_SITE_URL` as a build variable *and* a runtime variable, and `NUXT_TELEGRAM_BOT_TOKEN` / `NUXT_TELEGRAM_CHAT_ID` as runtime secrets.
 - `keep_vars: true` stops `wrangler deploy` deleting variables set in the dashboard. Build variables are not runtime variables: runtime ones go under Settings → Variables and Secrets.
 - Assets use `html_handling: drop-trailing-slash` so `/about` serves without a redirect, matching canonicals.
@@ -42,7 +42,7 @@ pnpm deploy:cf      # build + wrangler deploy (after `npx wrangler login`)
 
 ## SEO
 
-Every page calls `usePageSeo({ title, description })` (`composables/usePageSeo.ts`): it sets the title (suffix from the `titleTemplate` in `app.vue`), description, canonical URL and Open Graph/Twitter tags. Page descriptions live in `seo` in `data/site.ts`; blog posts use their first paragraph and cover. `app.vue` adds Person structured data and the article page adds BlogPosting. `server/routes/sitemap.xml.ts` and `robots.txt.ts` list pages and posts. Absolute URLs use `NUXT_PUBLIC_SITE_URL` (set it on the server to the live origin), falling back to the request origin. Don't put functions in `app.head` in `nuxt.config.ts`; Nuxt drops them.
+Every page calls `usePageSeo({ title, description })` (`composables/usePageSeo.ts`): it sets the title (suffix from the `titleTemplate` in `app.vue`), description, canonical URL and Open Graph/Twitter tags. Page descriptions live in `seo` in `data/site.ts`; blog posts use their first paragraph and cover. `app.vue` adds Person structured data and the article page adds BlogPosting. `server/routes/sitemap.xml.ts` and `robots.txt.ts` list pages and posts. Absolute URLs use `runtimeConfig.public.siteUrl` (default `https://orngneup.dev`, override with `NUXT_PUBLIC_SITE_URL`). Don't put functions in `app.head` in `nuxt.config.ts`; Nuxt drops them.
 
 ## Stack
 
