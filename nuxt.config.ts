@@ -1,6 +1,14 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 const bootCheck = `try{if(location.search.indexOf('noboot')>-1||sessionStorage.getItem('orng-boot')||matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('booted')}sessionStorage.setItem('orng-boot','1')}catch(e){document.documentElement.classList.add('booted')}`
 
+
+// Cloudflare builds prerender every page, so canonical URLs and share images
+// are baked in at build time and need the live origin then.
+// Without it the build still succeeds, but canonical and share tags are left out.
+if ((process.env.NITRO_PRESET || '').startsWith('cloudflare') && !process.env.NUXT_PUBLIC_SITE_URL) {
+  console.warn('[seo] NUXT_PUBLIC_SITE_URL is not set: prerendered pages will have no canonical URL or share image until it is.')
+}
+
 export default defineNuxtConfig({
   srcDir: "./",
   imports: {
@@ -67,14 +75,12 @@ export default defineNuxtConfig({
       // Live origin for canonical URLs, share images and the sitemap, e.g.
       // https://example.com. Set NUXT_PUBLIC_SITE_URL; falls back to the request origin.
       siteUrl: '',
-      baseURL: process.env.BASE_URL
     }
   },
 
   modules: [
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt',
-    '@nuxt/icon'
   ],
 
   postcss: {
@@ -82,6 +88,20 @@ export default defineNuxtConfig({
       tailwindcss: {},
       autoprefixer: {},
     },
+  },
+
+  // Every page is static except the APIs, sitemap and robots.txt, so build
+  // them to HTML. This keeps the Cloudflare Worker's CPU use near zero.
+  routeRules: {
+    '/': { prerender: true },
+    '/work': { prerender: true },
+    '/about': { prerender: true },
+    '/contact': { prerender: true },
+    '/blog': { prerender: true },
+    '/blog/**': { prerender: true },
+  },
+  nitro: {
+    prerender: { crawlLinks: true },
   },
 
   devtools: { enabled: true },

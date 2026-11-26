@@ -22,7 +22,22 @@ Add `?noboot` to any URL to skip the first-visit loading screen (useful for scre
 - `NUXT_TELEGRAM_BOT_TOKEN`: create a bot with @BotFather and copy its token.
 - `NUXT_TELEGRAM_CHAT_ID`: send the bot any message, then open `https://api.telegram.org/bot<token>/getUpdates` and copy `message.chat.id`.
 
-Without them the endpoint answers 503 and the form tells visitors to use Telegram directly. On the server, put `.env` in the repo folder the runner deploys from (docker-compose mounts it at `/app`).
+Without them the endpoint answers 503 and the form tells visitors to use Telegram directly. On Cloudflare, set them under the Worker's Settings → Variables and Secrets (the token as a secret).
+
+## Deploy: Cloudflare Workers (free plan)
+
+`wrangler.jsonc` configures the Worker `orng-portfolio`. Static pages are prerendered (`routeRules` in `nuxt.config.ts`), so the Worker only runs `/api/*`, `/sitemap.xml` and `/robots.txt`.
+
+```bash
+pnpm build:cf       # NITRO_PRESET=cloudflare_module; needs NUXT_PUBLIC_SITE_URL set
+pnpm preview:cf     # wrangler dev on :8787 (reads .env, so the contact form really sends)
+pnpm deploy:cf      # build + wrangler deploy (after `npx wrangler login`)
+```
+
+- Without `NUXT_PUBLIC_SITE_URL` the Cloudflare build warns and leaves out canonical URLs, share images and absolute structured-data URLs (never bakes in localhost). Set it to restore them.
+- In Cloudflare, set `NUXT_PUBLIC_SITE_URL` as a build variable *and* a runtime variable, and `NUXT_TELEGRAM_BOT_TOKEN` / `NUXT_TELEGRAM_CHAT_ID` as runtime secrets.
+- Assets use `html_handling: drop-trailing-slash` so `/about` serves without a redirect, matching canonicals.
+- `@unhead/vue` is a direct dependency because prerendering imports it; don't remove it.
 
 ## SEO
 
@@ -33,8 +48,8 @@ Every page calls `usePageSeo({ title, description })` (`composables/usePageSeo.t
 - Nuxt 3 (Vue 3, `srcDir: ./`), TypeScript
 - Tailwind CSS 3 through `@nuxtjs/tailwindcss`, plus hand-written tokens and classes in `assets/css/main.css`
 - Pinia (`@pinia/nuxt`; stores in `stores/` are auto-imported)
-- `@nuxt/icon` for brand icons; `marked` renders blog markdown
-- Deploy: push to `master` → GitHub Actions on a self-hosted runner → `docker-compose up -d` (see `Dockerfile`, `docker-compose.yml`, `.github/workflows/deploy.yml`)
+- `marked` renders blog markdown
+- Deploy: Cloudflare Workers Builds, connected to GitHub; every push to `master` deploys (see below). `Dockerfile` and `docker-compose.yml` remain for running it yourself.
 
 ## Layout
 

@@ -23,7 +23,7 @@ useHead({
         '@context': 'https://schema.org',
         '@type': 'Person',
         name: profile.name,
-        url: origin + '/',
+        url: origin ? origin + '/' : undefined,
         jobTitle: 'Lead Software Developer',
         worksFor: { '@type': 'Organization', name: 'TrueMoney Cambodia' },
         description: profile.headline,

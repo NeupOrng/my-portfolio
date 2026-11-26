@@ -10,11 +10,16 @@ type PageSeo = {
   type?: 'website' | 'article'
 }
 
-/** Absolute origin of the live site: NUXT_PUBLIC_SITE_URL, else the request origin. */
+/**
+ * Absolute origin of the live site: NUXT_PUBLIC_SITE_URL, else the request origin.
+ * Empty while prerendering without NUXT_PUBLIC_SITE_URL, because the build's own
+ * origin (localhost) must never end up in canonical or share URLs.
+ */
 export function useSiteOrigin() {
   const configured = useRuntimeConfig().public.siteUrl as string
-  const origin = configured || useRequestURL().origin
-  return origin.replace(/\/$/, '')
+  if (configured) return configured.replace(/\/$/, '')
+  if (import.meta.prerender) return ''
+  return useRequestURL().origin.replace(/\/$/, '')
 }
 
 /**
@@ -36,7 +41,7 @@ export function usePageSeo(page: PageSeo) {
 
   useHead({
     title: title,
-    link: [{ rel: 'canonical', href: url }],
+    link: origin ? [{ rel: 'canonical', href: url }] : [],
   })
 
   useSeoMeta({
@@ -44,13 +49,13 @@ export function usePageSeo(page: PageSeo) {
     ogTitle: fullTitle,
     ogDescription: () => toValue(page.description),
     ogType: page.type ?? 'website',
-    ogUrl: url,
+    ogUrl: () => (origin ? url.value : undefined),
     ogSiteName: seo.siteName,
-    ogImage: image,
+    ogImage: () => (origin ? image.value : undefined),
     ogImageAlt: () => toValue(page.imageAlt) || fullTitle.value,
     twitterCard: 'summary_large_image',
     twitterTitle: fullTitle,
     twitterDescription: () => toValue(page.description),
-    twitterImage: image,
+    twitterImage: () => (origin ? image.value : undefined),
   })
 }

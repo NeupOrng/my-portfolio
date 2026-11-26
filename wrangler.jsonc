@@ -1,0 +1,16 @@
+// Cloudflare Workers config. Build with `pnpm build:cf`, preview with
+// `pnpm preview:cf`, deploy with `pnpm deploy:cf` (or Workers Builds from GitHub).
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "orng-portfolio",
+  "main": "./.output/server/index.mjs",
+  "compatibility_date": "2026-11-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": "./.output/public",
+    "binding": "ASSETS",
+    // Serve about/index.html at /about (no redirect), matching the canonical URLs.
+    "html_handling": "drop-trailing-slash"
+  },
+  "observability": { "enabled": true }
+}

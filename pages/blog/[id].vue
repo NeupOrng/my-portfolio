@@ -51,10 +51,10 @@ useHead({
       headline: currentBlog.value.title,
       description: currentBlog.value.excerpt,
       datePublished: new Date(currentBlog.value.createdAt).toISOString(),
-      image: currentBlog.value.cover ? origin + currentBlog.value.cover : undefined,
+      image: origin && currentBlog.value.cover ? origin + currentBlog.value.cover : undefined,
       keywords: currentBlog.value.tags.join(', '),
-      author: { '@type': 'Person', name: 'Orng Neup', url: origin + '/' },
-      mainEntityOfPage: origin + route.path,
+      author: { '@type': 'Person', name: 'Orng Neup', url: origin ? origin + '/' : undefined },
+      mainEntityOfPage: origin ? origin + route.path : undefined,
     }),
   }],
 })
