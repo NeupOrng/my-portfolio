@@ -106,9 +106,9 @@
 </template>
 
 <script lang="ts" setup>
-import { links, profile, stack, trace } from '~/data/site'
+import { links, profile, seo, stack, trace } from '~/data/site'
 
-useHead({ title: '' })
+usePageSeo({ description: seo.pages.home })
 
 const totalMs = trace.reduce((sum, hop) => sum + hop.ms, 0)
 

@@ -24,6 +24,10 @@ Add `?noboot` to any URL to skip the first-visit loading screen (useful for scre
 
 Without them the endpoint answers 503 and the form tells visitors to use Telegram directly. On the server, put `.env` in the repo folder the runner deploys from (docker-compose mounts it at `/app`).
 
+## SEO
+
+Every page calls `usePageSeo({ title, description })` (`composables/usePageSeo.ts`): it sets the title (suffix from the `titleTemplate` in `app.vue`), description, canonical URL and Open Graph/Twitter tags. Page descriptions live in `seo` in `data/site.ts`; blog posts use their first paragraph and cover. `app.vue` adds Person structured data and the article page adds BlogPosting. `server/routes/sitemap.xml.ts` and `robots.txt.ts` list pages and posts. Absolute URLs use `NUXT_PUBLIC_SITE_URL` (set it on the server to the live origin), falling back to the request origin. Don't put functions in `app.head` in `nuxt.config.ts`; Nuxt drops them.
+
 ## Stack
 
 - Nuxt 3 (Vue 3, `srcDir: ./`), TypeScript

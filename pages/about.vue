@@ -75,8 +75,8 @@
 </template>
 
 <script setup lang="ts">
-import { aboutFacts, links, principles, values, workingStack } from '~/data/site'
-useHead({ title: 'About' })
+import { aboutFacts, links, principles, seo, values, workingStack } from '~/data/site'
+usePageSeo({ title: 'About', description: seo.pages.about })
 </script>
 
 <style scoped>

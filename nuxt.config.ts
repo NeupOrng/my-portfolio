@@ -13,13 +13,10 @@ export default defineNuxtConfig({
     },
     head: {
       htmlAttrs: { lang: 'en' },
-      titleTemplate: (title?: string) => title ? `${title} · Orng Neup` : 'Orng Neup · Full-stack engineer, skilled with AI',
+      // Title template, descriptions and share tags are set at runtime by
+      // app.vue and composables/usePageSeo.ts (functions can't live here).
       meta: [
-        { name: 'description', content: 'Orng Neup is a full-stack engineer who builds the whole path of a product, from Vue and React front ends to payment ledgers, identity and platform services, working with AI.' },
         { name: 'theme-color', content: '#0d0e0c' },
-        { property: 'og:title', content: 'Orng Neup · Full-stack engineer, skilled with AI' },
-        { property: 'og:type', content: 'website' },
-        { property: 'og:image', content: '/brand/orng-wordmark-on-dark-bg.png' },
       ],
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
@@ -67,6 +64,9 @@ export default defineNuxtConfig({
     telegramBotToken: '',
     telegramChatId: '',
     public: {
+      // Live origin for canonical URLs, share images and the sitemap, e.g.
+      // https://example.com. Set NUXT_PUBLIC_SITE_URL; falls back to the request origin.
+      siteUrl: '',
       baseURL: process.env.BASE_URL
     }
   },

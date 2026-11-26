@@ -2,7 +2,17 @@ import { marked } from "marked";
 import type { IBlog } from "~/models";
 
 // Plain objects only: Pinia state is serialized from server to client.
-export type BlogPost = IBlog & { htmlContent: string };
+export type BlogPost = IBlog & { htmlContent: string; excerpt: string };
+
+// The page renders the title as its own <h1>, so drop the markdown's leading "# Title".
+const stripTitle = (md: string) => md.replace(/^\s*#\s+[^\n]*\n/, '');
+
+// First paragraph as plain text, trimmed to about 155 characters for search snippets.
+const toExcerpt = (md: string) => {
+    const para = md.split(/\n\s*\n/).map((p) => p.trim()).find((p) => p && !/^[#|`>-]/.test(p)) ?? '';
+    const text = para.replace(/[*_`]/g, '').replace(/\[([^\]]+)\]\([^)]+\)/g, '$1').replace(/\s+/g, ' ');
+    return text.length > 155 ? text.slice(0, 152).replace(/\s+\S*$/, '') + '…' : text;
+};
 
 const emptyPost = (): BlogPost => ({
     id: '',
@@ -12,6 +22,7 @@ const emptyPost = (): BlogPost => ({
     tags: [],
     content: '',
     htmlContent: '',
+    excerpt: '',
 });
 
 export const useBlogStore = defineStore('blog', {
@@ -30,7 +41,8 @@ export const useBlogStore = defineStore('blog', {
                 throw createError({ statusCode: 404, statusMessage: 'Post not found' });
             }
             const post = response.data as unknown as IBlog;
-            this.currentBlog = { ...post, htmlContent: await marked(post.content ?? '') };
+            const body = stripTitle(post.content ?? '');
+            this.currentBlog = { ...post, htmlContent: await marked(body), excerpt: toExcerpt(body) };
         }
     },
 })

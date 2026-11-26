@@ -42,13 +42,13 @@
 </template>
 
 <script setup lang="ts">
-import { community, experience, links } from '~/data/site'
+import { community, experience, links, seo } from '~/data/site'
 
 const groups = [
   { label: 'Employment', heading: false, items: experience },
   { label: 'Community', heading: true, items: community },
 ]
-useHead({ title: 'Experience' })
+usePageSeo({ title: 'Experience', description: seo.pages.work })
 </script>
 
 <style scoped>

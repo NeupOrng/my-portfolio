@@ -18,7 +18,9 @@
 </template>
 
 <script lang="ts" setup>
-useHead({ title: 'Writing' })
+import { seo } from '~/data/site'
+
+usePageSeo({ title: 'Writing', description: seo.pages.blog })
 const blogStore = useBlogStore()
 const { blogs } = storeToRefs(blogStore)
 await blogStore.fetchBlog()

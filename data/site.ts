@@ -19,6 +19,20 @@ export const links = {
   whatsapp: { label: 'WhatsApp', handle: '+855 88 255 0515', href: 'https://wa.me/855882550515' },
 }
 
+// Search and share metadata, one description per page (about 150 characters).
+export const seo = {
+  siteName: 'Orng Neup',
+  defaultTitle: 'Orng Neup · Full-stack engineer, skilled with AI',
+  shareImage: '/brand/orng-wordmark-on-dark-bg.png',
+  pages: {
+    home: 'Orng Neup is a full-stack engineer leading back-end work in Cambodian fintech: Vue and React front ends, payment services, and building with AI.',
+    work: 'Experience of Orng Neup: Lead Software Developer at TrueMoney Cambodia, back-end and front-end roles at Techbodia, and community work with Khmer Coders.',
+    about: 'How Orng Neup works: engineering principles, the stack at work and in personal projects, and building with AI coding agents without giving up judgement.',
+    contact: 'Send Orng Neup a request for a full-stack role or a product build. It goes straight to Telegram; WhatsApp, LinkedIn and GitHub work too.',
+    blog: 'Writing by Orng Neup on front-end patterns, back-end decisions, payments and working with AI as an engineering lead.',
+  },
+}
+
 export const nav = [
   { label: 'Work', to: '/work' },
   { label: 'About', to: '/about' },

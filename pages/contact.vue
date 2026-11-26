@@ -27,8 +27,8 @@
 </template>
 
 <script setup lang="ts">
-import { links } from '~/data/site'
-useHead({ title: 'Contact' })
+import { links, seo } from '~/data/site'
+usePageSeo({ title: 'Contact', description: seo.pages.contact })
 const channels = [links.telegram, links.whatsapp, links.linkedin, links.github]
 </script>
 
