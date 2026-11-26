@@ -36,6 +36,7 @@ pnpm deploy:cf      # build + wrangler deploy (after `npx wrangler login`)
 
 - Without `NUXT_PUBLIC_SITE_URL` the Cloudflare build warns and leaves out canonical URLs, share images and absolute structured-data URLs (never bakes in localhost). Set it to restore them.
 - In Cloudflare, set `NUXT_PUBLIC_SITE_URL` as a build variable *and* a runtime variable, and `NUXT_TELEGRAM_BOT_TOKEN` / `NUXT_TELEGRAM_CHAT_ID` as runtime secrets.
+- `keep_vars: true` stops `wrangler deploy` deleting variables set in the dashboard. Build variables are not runtime variables: runtime ones go under Settings → Variables and Secrets.
 - Assets use `html_handling: drop-trailing-slash` so `/about` serves without a redirect, matching canonicals.
 - `@unhead/vue` is a direct dependency because prerendering imports it; don't remove it.
 

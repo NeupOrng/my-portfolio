@@ -6,6 +6,9 @@
   "main": "./.output/server/index.mjs",
   "compatibility_date": "2026-11-01",
   "compatibility_flags": ["nodejs_compat"],
+  // Keep variables set in the Cloudflare dashboard (Telegram settings, site URL).
+  // Without this, every `wrangler deploy` deletes plain-text dashboard variables.
+  "keep_vars": true,
   "assets": {
     "directory": "./.output/public",
     "binding": "ASSETS",
