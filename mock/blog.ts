@@ -1,13 +1,13 @@
 import type { IBlog } from "~/models";
-import vueContent from "./blogs/vue";
+import claudeTeamContent from "./blogs/claude-team";
 
 export const blogs: IBlog[] = [
     {
-        id: '7a7b123',
-        title: 'Enhancing Vue.js with Element UI: A Comprehensive Guide',
-        tags: ['Vuejs'],
-        cover: 'https://i.imgur.com/WybWXGi.jpeg',
-        createdAt: new Date('19 February 2025'),
-        content: vueContent
+        id: 'claude-as-a-team',
+        title: 'Claude as a team: how I lead an AI engineering crew',
+        tags: ['AI', 'Claude Code', 'Workflow'],
+        cover: '/image/blog/claude-as-a-team.webp',
+        createdAt: new Date('26 November 2026'),
+        content: claudeTeamContent
     }
 ]

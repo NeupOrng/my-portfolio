@@ -22,3 +22,13 @@ logs
 .env
 .env.*
 !.env.example
+
+# Claude Code personal settings (e.g. impeccable hooks)
+.claude/settings.local.json
+# impeccable engine binary (platform-specific; the launcher downloads it on first run)
+.claude/skills/impeccable/scripts/bin/
+# impeccable scratch output (captures, decision payloads); surfaces/ and design.json are kept
+.impeccable/review/
+.impeccable/tmp/
+.impeccable/questions/
+.impeccable/direction-payload.json

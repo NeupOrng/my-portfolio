@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" fill="none">
+  <rect width="512" height="512" fill="#0D0E0C"/>
+  <!-- Vertical trace from top landing on node -->
+  <rect x="246" y="64" width="20" height="20" fill="#E8E8E3"/>
+  <line x1="256" y1="84" x2="256" y2="216" stroke="#E8E8E3" stroke-width="10"/>
+  <!-- Settled lime square node -->
+  <rect x="168" y="216" width="176" height="176" fill="#C8F31D"/>
+  <!-- Signal O -->
+  <path d="M390 741C288 741 204 707 142 640C77 570 40 468 40 359C40 250 77 147 142 78C205 10 287 -23 391 -23C495 -23 577 10 640 78C703 145 742 251 742 354C742 468 705 571 640 640C576 709 496 741 390 741ZM391 613C514 613 592 513 592 355C592 205 511 105 391 105C269 105 190 205 190 359C190 513 269 613 391 613Z" transform="translate(212.43,344.82) scale(0.11200,-0.11200)" fill="#0D0E0C"/>
+</svg>

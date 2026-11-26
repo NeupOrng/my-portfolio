@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" fill="none">
+  <rect width="512" height="512" fill="#0D0E0C"/>
+  <!-- Outer HUD corner-tick brackets -->
+  <path d="M56 74 V56 H74" stroke="#A3A49C" stroke-width="2" stroke-linecap="square"/>
+  <path d="M438 56 H456 V74" stroke="#A3A49C" stroke-width="2" stroke-linecap="square"/>
+  <path d="M56 438 V456 H74" stroke="#A3A49C" stroke-width="2" stroke-linecap="square"/>
+  <path d="M438 456 H456 V438" stroke="#A3A49C" stroke-width="2" stroke-linecap="square"/>
+  <!-- Inner hairline frame -->
+  <rect x="76" y="76" width="360" height="360" stroke="#A3A49C" stroke-width="1.5" stroke-opacity="0.75"/>
+  <!-- Continuous trace: front-end top entry -> vertical drop -> settle on lime node -->
+  <path d="M188 76 V320 H276" stroke="#E8E8E3" stroke-width="3" stroke-linejoin="miter"/>
+  <!-- Secondary return / ledger branch -->
+  <path d="M216 176 H320 V276" stroke="#A3A49C" stroke-width="2" stroke-linejoin="miter"/>
+  <!-- Origin square node on top frame -->
+  <rect x="183" y="71" width="10" height="10" fill="#E8E8E3"/>
+  <!-- Settled target node: solid signal lime square -->
+  <rect x="276" y="276" width="88" height="88" fill="#C8F31D"/>
+  <!-- Signal O inside settled node -->
+  <path d="M390 741C288 741 204 707 142 640C77 570 40 468 40 359C40 250 77 147 142 78C205 10 287 -23 391 -23C495 -23 577 10 640 78C703 145 742 251 742 354C742 468 705 571 640 640C576 709 496 741 390 741ZM391 613C514 613 592 513 592 355C592 205 511 105 391 105C269 105 190 205 190 359C190 513 269 613 391 613Z" transform="translate(298.99,339.68) scale(0.05400,-0.05400)" fill="#0D0E0C"/>
+  <!-- Precision crosshair ticks around settled node -->
+  <line x1="380" y1="320" x2="404" y2="320" stroke="#A3A49C" stroke-width="2"/>
+  <line x1="320" y1="380" x2="320" y2="404" stroke="#A3A49C" stroke-width="2"/>
+  <!-- Subtle status readout -->
+  <text x="76" y="476" fill="#A3A49C" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="14" letter-spacing="1.2">201 · settled</text>
+</svg>

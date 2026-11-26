@@ -1,1 +1,0 @@
-export const COLOR_MODE = 'color-mode';

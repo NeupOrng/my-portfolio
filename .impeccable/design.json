@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-26T00:00:00Z",
+  "title": "Design System: Orng Neup",
+  "extensions": {
+    "colorMeta": {
+      "signal": { "role": "primary", "displayName": "Signal Lime", "canonical": "#c8f31d", "tonalRamp": ["#2b3500", "#435200", "#5c7000", "#7a9500", "#9cbf00", "#c8f31d", "#dcf86f", "#f0fcc4"] },
+      "ink": { "role": "neutral", "displayName": "Console Ink", "canonical": "#0d0e0c", "tonalRamp": ["#0d0e0c", "#161714", "#22231f", "#3a3b36", "#55564f", "#7c7d75", "#a3a49c", "#cfd0c9"] },
+      "paper": { "role": "neutral", "displayName": "Concrete Paper", "canonical": "#e8e8e3", "tonalRamp": ["#2a2a27", "#4a4a45", "#6e6e68", "#93938c", "#b8b8b1", "#dcdcd5", "#e8e8e3", "#f4f4f1"] },
+      "paper-sunk": { "role": "neutral", "displayName": "Sunk Concrete", "canonical": "#dcdcd5" },
+      "on-ink": { "role": "neutral", "displayName": "Bone", "canonical": "#ecece7" },
+      "on-ink-muted": { "role": "neutral", "displayName": "Ash", "canonical": "#a3a49c" },
+      "on-paper": { "role": "neutral", "displayName": "Ink on Paper", "canonical": "#0d0e0c" },
+      "on-paper-muted": { "role": "neutral", "displayName": "Graphite", "canonical": "#55564f" },
+      "line-ink": { "role": "neutral", "displayName": "Ink Hairline", "canonical": "rgba(236, 236, 231, 0.16)" },
+      "line-paper": { "role": "neutral", "displayName": "Paper Hairline", "canonical": "rgba(13, 14, 12, 0.16)" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Page titles and the closing call; one per page. Up to ~6rem on home and contact heroes." },
+      "headline": { "displayName": "Headline", "purpose": "Section titles and article titles." },
+      "title": { "displayName": "Title", "purpose": "Row titles in ruled lists (blog rows, experience roles)." },
+      "lede": { "displayName": "Lede", "purpose": "Paragraph under a page or section title, usually muted; max 34em." },
+      "body": { "displayName": "Body", "purpose": "Supporting copy and summaries." },
+      "prose": { "displayName": "Prose", "purpose": "Article body, max 68ch." },
+      "label": { "displayName": "Label", "purpose": "Uppercase tracked caps for nav, column headings and inline text links; buttons at 0.8125rem." },
+      "mono": { "displayName": "Mono", "purpose": "Machine data only: routes, timings, dates, tags, status codes, code." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "ease-out", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "The single easing for hovers, nav underline, page enter and boot loader." },
+      { "name": "hover", "value": "220ms", "purpose": "Button fills, arrow nudges, row and channel hovers (nav colour 200ms, nav underline 320ms)." },
+      { "name": "page-enter", "value": "opacity + translateY(12px) 360ms ease-out", "purpose": "Route change in; fade-only 160ms ease-in out. Removed under reduced motion." },
+      { "name": "boot", "value": "bar scaleX 900ms from 80ms; clip-path lift 520ms from 1050ms", "purpose": "First-visit-per-session loader; skipped on reduced motion, no-JS and repeat visits." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "max-site", "value": "1360px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Signal Button",
+      "kind": "button",
+      "refersTo": "button-signal",
+      "description": "Primary action, one per view: lime fill, ink text, square.",
+      "html": "<a class=\"ds-btn ds-btn-signal\" href=\"#\">Get in touch <svg class=\"ds-arrow\" viewBox=\"0 0 16 16\" width=\"1em\" height=\"1em\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" aria-hidden=\"true\"><path d=\"M4.5 11.5 11.5 4.5M5.5 4.5h6v6\" stroke-linecap=\"square\"/></svg></a>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; gap: 0.6rem; min-height: 3rem; padding: 0 1.25rem; border: 1px solid currentColor; border-radius: 0; font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; font-weight: 500; font-size: 0.8125rem; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; transition: background-color 220ms cubic-bezier(0.16,1,0.3,1), color 220ms cubic-bezier(0.16,1,0.3,1), border-color 220ms cubic-bezier(0.16,1,0.3,1); } .ds-btn .ds-arrow { transition: transform 220ms cubic-bezier(0.16,1,0.3,1); } .ds-btn:hover .ds-arrow { transform: translate(2px,-2px); } .ds-btn:focus-visible { outline: 2px solid var(--signal, #c8f31d); outline-offset: 3px; } .ds-btn-signal { background: var(--signal, #c8f31d); border-color: var(--signal, #c8f31d); color: var(--ink, #0d0e0c); } .ds-btn-signal:hover { background: var(--on-ink, #ecece7); border-color: var(--on-ink, #ecece7); }"
+    },
+    {
+      "name": "Line Button",
+      "kind": "button",
+      "refersTo": "button-line",
+      "description": "Secondary action: transparent with a 1px current-colour border; inverts on hover.",
+      "html": "<div style=\"background:#0d0e0c;padding:24px\"><a class=\"ds-btn-line\" href=\"#\">See my work</a></div>",
+      "css": ".ds-btn-line { display: inline-flex; align-items: center; gap: 0.6rem; min-height: 3rem; padding: 0 1.25rem; border: 1px solid currentColor; border-radius: 0; background: transparent; color: var(--on-ink, #ecece7); font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; font-weight: 500; font-size: 0.8125rem; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; transition: background-color 220ms cubic-bezier(0.16,1,0.3,1), color 220ms cubic-bezier(0.16,1,0.3,1), border-color 220ms cubic-bezier(0.16,1,0.3,1); } .ds-btn-line:hover { background: var(--on-ink, #ecece7); border-color: var(--on-ink, #ecece7); color: var(--ink, #0d0e0c); } .ds-btn-line:focus-visible { outline: 2px solid var(--signal, #c8f31d); outline-offset: 3px; }"
+    },
+    {
+      "name": "Primary Navigation",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Sticky 64px ink header: wordmark left, tracked caps links right, lime underline on the current route.",
+      "html": "<header class=\"ds-header\"><span class=\"ds-wordmark\"><span class=\"ds-o\">O</span>RNG</span><nav><a class=\"ds-nav-link ds-active\" href=\"#\">Work</a><a class=\"ds-nav-link\" href=\"#\">About</a><a class=\"ds-nav-link\" href=\"#\">Blog</a><a class=\"ds-nav-link\" href=\"#\">Contact</a></nav></header>",
+      "css": ".ds-header { display: flex; align-items: center; justify-content: space-between; height: 4rem; padding: 0 2.5rem; background: var(--ink, #0d0e0c); border-bottom: 1px solid var(--line-ink, rgba(236,236,231,0.16)); font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; } .ds-header nav { display: flex; gap: 2rem; } .ds-wordmark { color: var(--on-ink, #ecece7); font-weight: 600; letter-spacing: 0.08em; font-size: 1.0625rem; line-height: 1; } .ds-o { color: var(--signal, #c8f31d); } .ds-nav-link { position: relative; display: inline-block; padding: 0.5rem 0; color: var(--on-ink-muted, #a3a49c); font-weight: 500; font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; transition: color 200ms cubic-bezier(0.16,1,0.3,1); } .ds-nav-link:hover, .ds-nav-link.ds-active { color: var(--on-ink, #ecece7); } .ds-nav-link::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0.15rem; height: 2px; background: var(--signal, #c8f31d); transform: scaleX(0); transform-origin: left; transition: transform 320ms cubic-bezier(0.16,1,0.3,1); } .ds-nav-link.ds-active::after { transform: scaleX(1); } .ds-nav-link:focus-visible { outline: 2px solid var(--signal, #c8f31d); outline-offset: 3px; }"
+    },
+    {
+      "name": "Ruled List Row",
+      "kind": "card",
+      "description": "The card substitute: mono date, title, mono tags, arrow, hairline bottom rule. On paper.",
+      "html": "<div class=\"ds-paper\"><a class=\"ds-row\" href=\"#\"><time class=\"ds-mono\">12 Nov 2026</time><span class=\"ds-row-title\">Settling a payment exactly once</span><span class=\"ds-mono\">temporal · ledger</span><svg class=\"ds-row-arrow\" viewBox=\"0 0 16 16\" width=\"1em\" height=\"1em\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" aria-hidden=\"true\"><path d=\"M4.5 11.5 11.5 4.5M5.5 4.5h6v6\" stroke-linecap=\"square\"/></svg></a></div>",
+      "css": ".ds-paper { background: var(--paper, #e8e8e3); color: var(--on-paper, #0d0e0c); padding: 0 24px; border-top: 1px solid var(--on-paper, #0d0e0c); font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; } .ds-row { display: grid; grid-template-columns: 9rem 1fr 12rem auto; align-items: baseline; gap: 0.5rem 1.5rem; padding: 1.5rem 0; border-bottom: 1px solid var(--line-paper, rgba(13,14,12,0.16)); color: inherit; text-decoration: none; } .ds-mono { font-family: 'JetBrains Mono', ui-monospace, monospace; font-variant-numeric: tabular-nums; font-size: 0.8125rem; color: var(--on-paper-muted, #55564f); } .ds-row-title { font-size: clamp(1.25rem, 1rem + 1vw, 1.75rem); font-weight: 400; letter-spacing: -0.02em; line-height: 1.2; } .ds-row:hover .ds-row-title { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.22em; } .ds-row-arrow { transition: transform 220ms cubic-bezier(0.16,1,0.3,1); } .ds-row:hover .ds-row-arrow { transform: translate(3px,-3px); } .ds-row:focus-visible { outline: 2px solid var(--on-paper, #0d0e0c); outline-offset: 3px; }"
+    },
+    {
+      "name": "HUD Frame with Request Trace",
+      "kind": "custom",
+      "description": "Signature: hairline frame with two drawn lime corner ticks, holding the mono request trace and the lime settled row.",
+      "html": "<div class=\"ds-ink\"><figure class=\"ds-hud\"><div class=\"ds-hud-head\"><span>POST /orders</span><span class=\"ds-muted\">trace</span></div><ol class=\"ds-trace\"><li><span class=\"ds-node\"></span><span class=\"ds-hop\">Browser</span><span class=\"ds-muted\">Nuxt · Vue 3</span><span class=\"ds-muted\">12ms</span></li><li><span class=\"ds-node\"></span><span class=\"ds-hop\">Gateway</span><span class=\"ds-muted\">Kong · OIDC</span><span class=\"ds-muted\">4ms</span></li><li><span class=\"ds-node\"></span><span class=\"ds-hop\">Ledger</span><span class=\"ds-muted\">Formance</span><span class=\"ds-muted\">18ms</span></li></ol><div class=\"ds-settled\"><span>201 · settled</span><span>34ms</span></div></figure></div>",
+      "css": ".ds-ink { background: var(--ink, #0d0e0c); color: var(--on-ink, #ecece7); padding: 32px; font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; } .ds-hud { position: relative; margin: 0; border: 1px solid var(--line-ink, rgba(236,236,231,0.16)); } .ds-hud::before, .ds-hud::after { content: ''; position: absolute; width: 12px; height: 12px; pointer-events: none; } .ds-hud::before { top: -1px; left: -1px; border-top: 2px solid var(--signal, #c8f31d); border-left: 2px solid var(--signal, #c8f31d); } .ds-hud::after { right: -1px; bottom: -1px; border-right: 2px solid var(--signal, #c8f31d); border-bottom: 2px solid var(--signal, #c8f31d); } .ds-hud-head { display: flex; justify-content: space-between; padding: 0.75rem 1.25rem; border-bottom: 1px solid var(--line-ink, rgba(236,236,231,0.16)); font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.75rem; } .ds-muted { color: var(--on-ink-muted, #a3a49c); font-family: 'JetBrains Mono', ui-monospace, monospace; font-variant-numeric: tabular-nums; font-size: 0.8125rem; } .ds-trace { list-style: none; margin: 0; padding: 0.75rem 1.25rem; } .ds-trace li { display: grid; grid-template-columns: 0.75rem 6.5rem 1fr auto; align-items: baseline; column-gap: 0.75rem; padding: 0.7rem 0; } .ds-node { width: 7px; height: 7px; border: 1px solid var(--on-ink, #ecece7); align-self: center; } .ds-hop { font-weight: 500; } .ds-settled { display: flex; justify-content: space-between; padding: 0.85rem 1.25rem; background: var(--signal, #c8f31d); color: var(--ink, #0d0e0c); font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.8125rem; font-weight: 500; }"
+    },
+    {
+      "name": "Status Bar",
+      "kind": "custom",
+      "refersTo": "status-bar",
+      "description": "Signature: fixed 32px ink bar reporting the live route as GET /path 200 OK.",
+      "html": "<div class=\"ds-status\" role=\"status\"><p class=\"ds-status-left\"><span class=\"ds-dot\"></span><span class=\"ds-dim\">GET</span><span>/work</span><span class=\"ds-ok\">200 OK</span></p><p class=\"ds-dim\">orng.neup // full-stack</p></div>",
+      "css": ".ds-status { display: flex; align-items: center; justify-content: space-between; height: 2rem; padding: 0 2.5rem; background: var(--ink, #0d0e0c); color: var(--on-ink, #ecece7); border-top: 1px solid var(--line-ink, rgba(236,236,231,0.16)); font-family: 'JetBrains Mono', ui-monospace, monospace; font-variant-numeric: tabular-nums; font-size: 0.75rem; } .ds-status p { margin: 0; } .ds-status-left { display: flex; align-items: center; gap: 0.75rem; } .ds-dot { width: 6px; height: 6px; background: var(--signal, #c8f31d); } .ds-dim { color: var(--on-ink-muted, #a3a49c); } .ds-ok { color: var(--signal, #c8f31d); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Request Console",
+    "overview": "The site reads like a quiet operations console for one engineer: near-black ink for identity, cool concrete paper for reading, and a single lime signal that only ever means \"live\" or \"settled\". Structure is drawn, never filled: 1px hairlines divide rows and columns, and the few framed objects carry two drawn corner ticks instead of a box shadow or a radius. Data speaks in monospace (routes, timings, dates, tags, status codes); everything human speaks in Archivo, light and tightly tracked at large sizes.\n\nDensity is low and deliberate. Big light headlines sit on a 12-column grid with long, open sections (96 to 144px of vertical padding), and lists are ruled tables rather than cards. Motion exists only for orientation: a first-visit boot loader and a short page transition, both removed under reduced motion. Nothing moves on scroll.\n\nThe world alternates surfaces section by section rather than using a theme toggle. Ink opens and closes a page (hero, closing call, contact); paper carries the reading in between (stack, writing, experience, articles). The fixed status bar at the foot of every page reports the current route as `GET /path 200 OK`, and it is the system's recurring signature.",
+    "keyCharacteristics": [
+      "Two surfaces (ink and paper) alternated by section; one lime signal.",
+      "Square everything: no radius anywhere, no shadows.",
+      "Hairline 1px rules and ruled-table lists instead of cards.",
+      "Archivo light display with negative tracking; tracked Archivo caps for controls; JetBrains Mono for data only.",
+      "HUD frame: hairline box with two drawn corner ticks, used sparingly on the one framed object per view.",
+      "Fixed mono status bar showing the live route."
+    ],
+    "rules": [
+      { "name": "The One Signal Rule", "body": "Lime is the only chromatic colour. It marks state (live, settled, current, focused) or the primary action, never decoration, and it never appears as text on paper; on paper the same roles fall to ink (focus outlines and HUD ticks turn ink).", "section": "colors" },
+      { "name": "The Surface Swap Rule", "body": "Every surface token has an \"on\" partner. Muted text, hairlines, HUD borders and focus colours are re-derived when a block sits on paper; never place ink-surface muted values on paper.", "section": "colors" },
+      { "name": "The Mono Is Data Rule", "body": "JetBrains Mono appears only on machine-shaped content: routes, ms timings, ISO-ish dates, tags, status codes, code. Prose, headings and labels are always Archivo.", "section": "typography" },
+      { "name": "The Light At Scale Rule", "body": "The larger the type, the lighter and tighter it gets: 300 and -0.04em for display, 350 and -0.03em for headlines. Never set display sizes at bold weights.", "section": "typography" },
+      { "name": "The Drawn Not Lifted Rule", "body": "If something needs emphasis, frame it with a hairline and corner ticks or swap its surface; never give it a shadow.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do alternate ink and paper by section, opening and closing pages on ink.",
+      "Do keep lime to fills and to text or rules on ink, and to state or the primary action.",
+      "Do use hairline (16%) rules and ruled-table rows to structure content.",
+      "Do set machine data (routes, timings, dates, tags, status) in JetBrains Mono with tabular numerals.",
+      "Do keep corners square (0px) on every element.",
+      "Do keep motion to the boot loader, the page transition (360ms fade with a 12px rise in, 160ms fade out) and 200–320ms hover easing on `cubic-bezier(0.16, 1, 0.3, 1)`; remove the loader and transitions under reduced motion."
+    ],
+    "donts": [
+      "Don't add shadows, glows, blurs or rounded corners.",
+      "Don't set lime text on paper.",
+      "Don't introduce a second accent colour or gradients.",
+      "Don't wrap content in cards; use ruled rows or a single HUD frame.",
+      "Don't add scroll-driven or looping animation.",
+      "Don't use mono for prose, headings or button labels."
+    ]
+  }
+}

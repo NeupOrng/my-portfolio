@@ -1,19 +1,25 @@
 <template>
-    <div class="w-full pt-20">
-        <section class="w-full max-w-[1440px] mx-auto flex flex-col items-center">
-            <div class="w-fit gap-5 grid grid-cols-1 md:grid-cols-3 px-5 pt-5">
-                <BlogCard
-                    v-for="(blog, index) in blogs" 
-                    :key="index"
-                    :blog="blog"
-                />
-            </div>
-        </section>
-    </div>
+  <div class="on-paper">
+    <section class="mx-auto max-w-site px-5 pb-24 pt-20 md:px-10 md:pt-28">
+      <div class="grid gap-8 lg:grid-cols-12">
+        <h1 class="display text-[clamp(3rem,1.6rem+5vw,5.5rem)] lg:col-span-6">Writing</h1>
+        <p class="lede text-muted lg:col-span-5 lg:col-start-8 lg:self-end">
+          Notes from building things: front-end patterns, back-end decisions, and what I learn along the way.
+        </p>
+      </div>
+      <ul v-if="blogs.length" class="mt-16 border-t border-[var(--on-paper)]">
+        <li v-for="blog in blogs" :key="blog.id">
+          <BlogRow :blog="blog" />
+        </li>
+      </ul>
+      <p v-else class="mt-16 border-t border-[var(--on-paper)] pt-8 text-muted">No posts yet. The first one is being written.</p>
+    </section>
+  </div>
 </template>
-<script lang="ts" setup>
-const blogStore = useBlogStore();
-const { blogs } = storeToRefs(blogStore)
 
-await blogStore.fetchBlog();
+<script lang="ts" setup>
+useHead({ title: 'Writing' })
+const blogStore = useBlogStore()
+const { blogs } = storeToRefs(blogStore)
+await blogStore.fetchBlog()
 </script>

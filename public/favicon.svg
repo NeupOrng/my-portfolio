@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none">
+  <rect width="32" height="32" fill="#0D0E0C"/>
+  <!-- Corner ticks -->
+  <path d="M3 8 V3 H8" stroke="#A3A49C" stroke-width="1.5" stroke-linecap="square"/>
+  <path d="M24 3 H29 V8" stroke="#A3A49C" stroke-width="1.5" stroke-linecap="square"/>
+  <path d="M3 24 V29 H8" stroke="#A3A49C" stroke-width="1.5" stroke-linecap="square"/>
+  <path d="M24 29 H29 V24" stroke="#A3A49C" stroke-width="1.5" stroke-linecap="square"/>
+  <!-- Trace line -->
+  <path d="M9 7 V20 H15" stroke="#E8E8E3" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"/>
+  <!-- Settled lime node -->
+  <rect x="14" y="14" width="12" height="12" fill="#C8F31D"/>
+  <!-- Crisp geometric square-O inside node -->
+  <rect x="17" y="17" width="6" height="6" stroke="#0D0E0C" stroke-width="2"/>
+</svg>

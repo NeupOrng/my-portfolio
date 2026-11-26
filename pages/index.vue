@@ -1,149 +1,169 @@
 <template>
-  <div id="landing-page" class="flex flex-col w-full min-h-screen">
-    <!-- Top Section: Welcome and Photo -->
-    <section class="w-full">
-      <!-- Welcome Text -->
-      <div class="max-w-[1440px] max-h-[900px] h-screen mx-auto px-6 py-16 flex flex-col justify-center md:justify-between md:flex-row items-center h-full">
-        <div class="md:w-1/2 text-center md:text-left">
-          <h1 class="text-4xl font-bold mb-4">
-            Welcome to My Portfolio
+  <div>
+    <!-- First viewport: who, what, and the trace that proves it -->
+    <section class="on-ink">
+      <div class="mx-auto grid max-w-site gap-12 px-5 pb-20 pt-16 md:px-10 lg:min-h-[calc(100svh-4rem-var(--statusbar-h))] lg:grid-cols-12 lg:items-center lg:gap-10 lg:py-16">
+        <div class="lg:col-span-7">
+          <h1 class="display text-[clamp(3.25rem,1.6rem+6.4vw,6rem)]">
+            Front end<br>to ledger.
           </h1>
-          <div class="max-w-md mx-auto md:mx-0 min-h-48">
-            <p class="text-lg font-mono" id="typing">
-              Hi, I'm Orng, a passionate developer specializing in Vue.js and modern web technologies.
-            </p>
+          <p class="lede mt-8 text-muted">{{ profile.intro }}</p>
+          <div class="mt-10 flex flex-wrap gap-3">
+            <NuxtLink to="/contact" class="btn btn-signal">Get in touch <ArrowIcon class="btn-arrow" /></NuxtLink>
+            <NuxtLink to="/work" class="btn btn-line">See my work</NuxtLink>
           </div>
         </div>
-        <!-- Photo -->
-        <div class="md:w-1/2 mt-8 md:mt-0 flex justify-center">
-          <div 
-            class="w-[200px] h-[200px] before:h-[200px] before:w-[200px]
-            md:w-[300px] md:h-[300px] md:before:h-[300px] md:before:w-[300px] 
-            background-secondary rounded-[50px] rotate-45 human-photo-container" 
-          >
-            <div class="w-full h-full overflow-hidden rounded-[50px]">
-              <img
-              src="~/assets/image/human.png"
-              alt="Your Photo" 
-              id="human-photo"
-              class="max-h-[400px] md:max-h-[500px] m-auto -rotate-45 translate-4"/>
-            </div>
+
+        <figure class="hud lg:col-span-5" aria-labelledby="trace-caption">
+          <div class="mono flex items-center justify-between border-b hairline px-5 py-3 text-xs">
+            <span>POST /orders</span>
+            <span class="text-muted">trace</span>
+          </div>
+          <ol class="trace">
+            <li v-for="(hop, i) in trace" :key="hop.hop" class="trace-row">
+              <span class="trace-node" aria-hidden="true" />
+              <span class="trace-hop">{{ hop.hop }}</span>
+              <span class="mono trace-stack text-muted">{{ hop.stack }}</span>
+              <span class="mono trace-ms text-muted">{{ hop.ms }}ms</span>
+              <span v-if="i < trace.length - 1" class="trace-link" aria-hidden="true" />
+            </li>
+          </ol>
+          <div class="settled mono">
+            <span>201 · settled</span>
+            <span>{{ totalMs }}ms</span>
+          </div>
+          <figcaption id="trace-caption" class="mono px-5 py-3 text-[0.6875rem] text-muted">
+            One request through the stack I build. Timings are illustrative.
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Both ends of the stack -->
+    <section class="on-paper">
+      <div class="mx-auto max-w-site px-5 py-24 md:px-10 md:py-32">
+        <div class="grid gap-8 lg:grid-cols-12">
+          <h2 class="heading text-[clamp(2.5rem,1.6rem+3.4vw,4.5rem)] lg:col-span-7">Both ends of the stack, one pair of hands.</h2>
+          <p class="lede text-muted lg:col-span-4 lg:col-start-9 lg:self-end">
+            No handoff between the screen and the system behind it. The interface and the service that serves it are designed together, so neither side gets surprised.
+          </p>
+        </div>
+
+        <div class="mt-16 grid border-t hairline md:grid-cols-2">
+          <div class="border-b hairline py-8 md:border-b-0 md:border-r md:pr-10">
+            <h3 class="caps text-muted">Front end</h3>
+            <ul class="mt-6 space-y-1">
+              <li v-for="item in stack.front" :key="item" class="stack-item">{{ item }}</li>
+            </ul>
+          </div>
+          <div class="py-8 md:pl-10 md:text-right">
+            <h3 class="caps text-muted">Back end</h3>
+            <ul class="mt-6 space-y-1">
+              <li v-for="item in stack.back" :key="item" class="stack-item">{{ item }}</li>
+            </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Middle Section: Skills -->
-    <section class="background-secondary py-16">
-      <div class="container mx-auto px-6">
-        <h2 class="text-3xl font-bold text-center mb-8">
-          My Skills
-        </h2>
-        <Tab :tabs="tabs">
-          <template v-for="tab in tabs" :key="tab.label" :name="tab.slotName">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div v-for="skill in tab.content.split(', ')" :key="skill" class="bg-white p-6 rounded-lg shadow-md">
-                <h3 class="text-xl font-semibold text-gray-800 mb-4">{{ skill }}</h3>
-                <p class="text-gray-600">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                  Phasellus nec iaculis mauris.
-                </p>
-              </div>
-            </div>
-          </template>
-        </Tab>
+    <!-- Working with AI -->
+    <section class="on-paper border-t hairline">
+      <div class="mx-auto grid max-w-site gap-8 px-5 py-24 md:px-10 lg:grid-cols-12">
+        <h2 class="heading text-[clamp(2.25rem,1.6rem+2.6vw,3.75rem)] lg:col-span-5">Built with AI, owned by me.</h2>
+        <div class="lg:col-span-6 lg:col-start-7">
+          <p class="lede">Coding agents take the volume: scaffolding, tests, migrations, refactors. I keep the architecture, the review and the final call, and every repo carries the written context that keeps both of us honest.</p>
+          <NuxtLink to="/about#ai" class="caps mt-8 inline-flex items-center gap-2 no-underline hover:underline">How I work with AI <ArrowIcon /></NuxtLink>
+        </div>
       </div>
     </section>
 
-    <!-- Bottom Section: Achievements -->
-    <section class="container mx-auto px-6 py-16">
-      <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">
-        My Achievements
-      </h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Achievement 1 -->
-        <div class="bg-white p-6 rounded-lg shadow-md">
-          <h3 class="text-xl font-semibold text-gray-800 mb-4">Project A</h3>
-          <p class="text-gray-600">
-            Developed a scalable e-commerce platform using Vue.js and Node.js.
-          </p>
+    <!-- Writing -->
+    <section v-if="latest.length" class="on-paper border-t hairline">
+      <div class="mx-auto max-w-site px-5 py-24 md:px-10">
+        <div class="flex items-end justify-between gap-6">
+          <h2 class="heading text-[clamp(2.25rem,1.6rem+2.6vw,3.75rem)]">Writing</h2>
+          <NuxtLink to="/blog" class="caps inline-flex items-center gap-2 pb-2 no-underline hover:underline">All posts <ArrowIcon /></NuxtLink>
         </div>
-        <!-- Achievement 2 -->
-        <div class="bg-white p-6 rounded-lg shadow-md">
-          <h3 class="text-xl font-semibold text-gray-800 mb-4">Project B</h3>
-          <p class="text-gray-600">
-            Built a real-time chat application with Vue.js and Firebase.
-          </p>
-        </div>
-        <!-- Achievement 3 -->
-        <div class="bg-white p-6 rounded-lg shadow-md">
-          <h3 class="text-xl font-semibold text-gray-800 mb-4">Project C</h3>
-          <p class="text-gray-600">
-            Created a responsive portfolio website using Tailwind CSS and
-            Vue.js.
-          </p>
+        <ul class="mt-10 border-t hairline">
+          <li v-for="post in latest" :key="post.id">
+            <BlogRow :blog="post" />
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Close -->
+    <section class="on-ink">
+      <div class="mx-auto max-w-site px-5 py-28 md:px-10 md:py-36">
+        <h2 class="display text-[clamp(2.75rem,1.4rem+5vw,5.5rem)]">Have something<br>to build?</h2>
+        <div class="mt-12 flex flex-wrap gap-3">
+          <NuxtLink to="/contact" class="btn btn-signal">Start a conversation <ArrowIcon class="btn-arrow" /></NuxtLink>
+          <a :href="links.linkedin.href" target="_blank" rel="noopener" class="btn btn-line">LinkedIn <ArrowIcon class="btn-arrow" /></a>
         </div>
       </div>
     </section>
   </div>
 </template>
+
 <script lang="ts" setup>
-import Tab from '~/components/tab.vue';
+import { links, profile, stack, trace } from '~/data/site'
 
-const displayText = "Hi, I'm Orng, a passionate developer specializing in Vue.js and modern web technologies.";
-const currentText = ref("");
-const totalLength = displayText.length;
-const hideCursor = ref(false);
-let index = 0;
-const tabs = reactive([
-  { label: "Frontend", content: "Vue.js, React.js, Tailwind CSS", slotName: "frontend" },
-  { label: "Backend", content: "Node.js, Express.js, MongoDB", slotName: "backend" },
-  { label: "Others", content: "Firebase, Git, Docker", slotName: "others" },
-]);
-onBeforeMount(() => {
-  const interval = setInterval(() => {
-    currentText.value += displayText[index];
-    index++;
-    if (index === totalLength) {
-      clearInterval(interval);
-      hideCursor.value = true;
-    }
-  }, 50);
-});
+useHead({ title: '' })
+
+const totalMs = trace.reduce((sum, hop) => sum + hop.ms, 0)
+
+const blogStore = useBlogStore()
+const { blogs } = storeToRefs(blogStore)
+await blogStore.fetchBlog()
+const latest = computed(() => blogs.value.slice(0, 3))
 </script>
-<style lang="css" scoped>
-.human-photo-container::before {
-  content: "";
-  position: absolute; 
-  top: 50%;
-  left: 50%; 
-  background: transparent;
-  border-width: 4px;
-  border-color: var(--ui-primary-button-background-color);
-  border-style: solid;
-  transform: translate(-45%, -45%); 
-  border-radius: 50px;
-  transition: 500ms ease-in-out;
-}
-#human-photo {
-  transform: translate(72px, 0px) rotate(-45deg);
-}
-.bg-image {
-  background: url("~/assets/image/banner-bg.png") no-repeat 50%;
-  background-size: cover;
-  background-attachment: fixed;
-  overflow: hidden;
-  background-position: center;
-}
 
-@keyframes blink {
-  50% {
-    opacity: 1;
-  }
+<style scoped>
+.trace {
+  padding: 0.75rem 1.25rem;
 }
-
-.animate-blink {
-  opacity: 0;
-  animation: blink 1s infinite;
+.trace-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 0.75rem 6.5rem 1fr auto;
+  align-items: baseline;
+  column-gap: 0.75rem;
+  padding: 0.7rem 0;
+}
+.trace-node {
+  width: 7px;
+  height: 7px;
+  border: 1px solid var(--on-ink);
+  align-self: center;
+}
+.trace-link {
+  position: absolute;
+  left: 3px;
+  top: calc(50% + 6px);
+  height: calc(100% - 10px);
+  width: 1px;
+  background: var(--line-ink);
+}
+.trace-hop { font-weight: 500; }
+.trace-stack { font-size: 0.8125rem; overflow-wrap: anywhere; }
+.trace-ms { font-size: 0.75rem; }
+.settled {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.85rem 1.25rem;
+  background: var(--signal);
+  color: var(--ink);
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+.stack-item {
+  font-size: clamp(1.625rem, 1.2rem + 1.6vw, 2.5rem);
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  line-height: 1.25;
+}
+@media (max-width: 420px) {
+  .trace-row { grid-template-columns: 0.75rem 1fr auto; }
+  .trace-stack { grid-column: 2 / 4; grid-row: 2; }
 }
 </style>

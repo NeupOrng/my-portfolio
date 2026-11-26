@@ -1,33 +1,36 @@
-import { Blog, type IBlog } from "~/models";
+import { marked } from "marked";
+import type { IBlog } from "~/models";
+
+// Plain objects only: Pinia state is serialized from server to client.
+export type BlogPost = IBlog & { htmlContent: string };
+
+const emptyPost = (): BlogPost => ({
+    id: '',
+    title: '',
+    cover: '',
+    createdAt: new Date(0).toISOString() as unknown as Date,
+    tags: [],
+    content: '',
+    htmlContent: '',
+});
 
 export const useBlogStore = defineStore('blog', {
     state: () => ({
-        blogs: [] as Blog[],
-        currentBlog: new Blog(),
+        blogs: [] as IBlog[],
+        currentBlog: emptyPost(),
     }),
     actions: {
         async fetchBlog() {
-            const themeStore = useThemeStore();
-            await themeStore.onLoading(this.promiseFetchBlog)
-        },
-        async promiseFetchBlog() {
-            this.blogs = [];
             const response = await $fetch('/api/blog');
-            const blogsResponse = response.data;
-            for (const blog of blogsResponse) {
-                const newBlog = new Blog().fromJson(blog);
-                this.blogs.push(newBlog);
-            }
+            this.blogs = response.data as unknown as IBlog[];
         },
         async fetchBlogById(id: string) {
-            const themeStore = useThemeStore();
-            await themeStore.onLoading(async () => {
-                const response = await $fetch(`/api/blog/${id}`)
-                this.currentBlog =  new Blog().fromJson(response.data);
-                await this.currentBlog.generateHtmlContent();
-            })
+            const response = await $fetch(`/api/blog/${id}`);
+            if (!response.data) {
+                throw createError({ statusCode: 404, statusMessage: 'Post not found' });
+            }
+            const post = response.data as unknown as IBlog;
+            this.currentBlog = { ...post, htmlContent: await marked(post.content ?? '') };
         }
     },
-    getters: {
-    }
 })
